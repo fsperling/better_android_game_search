@@ -20,6 +20,10 @@ group :test do
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.5.3'
 end
+
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'sprockets', '2.11.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.1'
 # Use Uglifier as compressor for JavaScript assets
