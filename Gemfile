@@ -21,6 +21,8 @@ group :test do
   gem 'childprocess', '0.5.3'
   
   gem 'factory_girl_rails', '4.2.0'
+  gem 'cucumber-rails', '1.4.0', :require => false
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'  
 end
 
 gem 'bootstrap-sass', '2.3.2.0'
