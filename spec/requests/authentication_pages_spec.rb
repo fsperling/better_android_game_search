@@ -9,6 +9,9 @@ describe "Authentication" do
 
     it { should have_content('Sign in') }
     it { should have_title('Sign in') }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Settings') }
+
   end
 
   describe "signin" do
@@ -29,9 +32,7 @@ describe "Authentication" do
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before do
-        fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
+        sign_in user
       end
 
       it { should have_title(user.name) }
@@ -54,9 +55,7 @@ describe "Authentication" do
         describe "when attempting to visit a protected page" do
           before do
             visit edit_user_path(user)
-            fill_in "Email",    with: user.email
-            fill_in "Password", with: user.password
-            click_button "Sign in"
+            sign_in user
           end
           
           describe "after signing in" do
@@ -65,6 +64,18 @@ describe "Authentication" do
               expect(page).to have_title('Edit user')
             end
           end
+          
+          describe "the next sign in" do
+            before do
+              click_link "Sign out"
+              sign_in user
+            end
+            
+            it "should load the default i.e. profile page" do
+              expect(page).to have_title(user.name)
+            end
+          end
+          
         end
         
       describe "as non-admin user" do
