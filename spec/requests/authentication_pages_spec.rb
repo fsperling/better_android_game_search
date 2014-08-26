@@ -65,31 +65,43 @@ describe "Authentication" do
       end
       
 
-        describe "when attempting to visit a protected page" do
+      describe "when attempting to visit a protected page" do
+        before do
+          visit edit_user_path(user)
+          sign_in user
+        end
+        
+        describe "after signing in" do
+
+          it "should render the desired protected page" do
+            expect(page).to have_title('Edit user')
+          end
+        end
+        
+        describe "the next sign in" do
           before do
-            visit edit_user_path(user)
+            click_link "Sign out"
             sign_in user
           end
           
-          describe "after signing in" do
-  
-            it "should render the desired protected page" do
-              expect(page).to have_title('Edit user')
-            end
+          it "should load the default i.e. profile page" do
+            expect(page).to have_title(user.name)
           end
-          
-          describe "the next sign in" do
-            before do
-              click_link "Sign out"
-              sign_in user
-            end
-            
-            it "should load the default i.e. profile page" do
-              expect(page).to have_title(user.name)
-            end
-          end
-          
         end
+          
+        describe "in the Relationships controller" do
+          describe "submitting to the create action" do
+            before { post relationships_path }
+            specify { expect(response).to redirect_to(signin_path) }
+          end
+  
+          describe "submitting to the destroy action" do
+            before { delete relationship_path(1) }
+            specify { expect(response).to redirect_to(signin_path) }
+          end
+        end          
+          
+      end
         
       describe "as non-admin user" do
         let(:user) { FactoryGirl.create(:user) }
@@ -121,6 +133,15 @@ describe "Authentication" do
           it { should have_title('Sign in') }
         end
 
+        describe "visiting the following page" do
+          before { visit following_user_path(user) }
+          it { should have_title('Sign in') }
+        end
+
+        describe "visiting the followers page" do
+          before { visit followers_user_path(user) }
+          it { should have_title('Sign in') }
+        end
         
       end
     end

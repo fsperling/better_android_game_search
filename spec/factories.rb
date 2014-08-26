@@ -14,4 +14,9 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end  
+  
+  factory :game do
+    name "Unreal"
+    description "alien ego shooter"
+  end
 end

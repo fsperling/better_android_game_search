@@ -1,0 +1,13 @@
+<% provide(:title, 'Create new game') %>
+
+<h1>Enter information for a new game</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@game) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= render 'gamefields', f: f %>
+      <%= f.submit "Create new game", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
