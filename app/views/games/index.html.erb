@@ -1,10 +1,6 @@
 <% provide(:title, 'All games') %>
 <h1>All games</h1>
 
-<%= will_paginate %>
-
-<ul class="games">
-   <%= render @games %>
-</ul>
+<%= render 'games/game_list' %>
 
 <%= will_paginate %>

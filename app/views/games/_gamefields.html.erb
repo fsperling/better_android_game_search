@@ -1,5 +1,17 @@
-<%= f.label :name %>
-<%= f.text_field :name %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
 
-<%= f.label :description %>
-<%= f.text_field :description %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :version %>
+  <%= f.text_field :version %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :webpage %>
+  <%= f.text_field :webpage %>
+
+  
+  <%= collection_check_boxes(:game, :category_ids, Category.all, :id, :name) %>

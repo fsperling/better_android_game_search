@@ -18,5 +18,8 @@ FactoryGirl.define do
   factory :game do
     name "Unreal"
     description "alien ego shooter"
+    version "v1.0"
+    email "bla@asdf.com"
+    webpage "http://www.asdf.com/"
   end
 end

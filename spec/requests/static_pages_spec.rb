@@ -11,7 +11,7 @@ describe "Static pages" do
 
   describe "Home page" do
     before { visit root_path }
-    let(:heading)    { 'Sample App' }
+    let(:heading)    { 'mobile game search' }
     let(:page_title) { '' }
 
     it_should_behave_like "all static pages"
@@ -51,9 +51,9 @@ describe "Static pages" do
     click_link "Contact"
     expect(page).to have_title(full_title('Contact'))
     click_link "Home"
-    click_link "Sign up now!"
+    click_link "Sign up"
     expect(page).to have_title(full_title(''))
-    click_link "sample app"
+    click_link "Tha game search"
     expect(page).to have_title(full_title(''))
   end
   
@@ -63,7 +63,7 @@ describe "Static pages" do
       FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
       FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
       sign_in user
-      visit root_path
+      visit home_path
     end
 
     it "should render the user's feed" do
@@ -77,7 +77,7 @@ describe "Static pages" do
       let(:other_user) { FactoryGirl.create(:user) }
       before do
         other_user.follow!(user)
-        visit root_path
+        visit home_path
       end
 
       it { should have_link("0 following", href: following_user_path(user)) }

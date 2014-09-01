@@ -4,6 +4,9 @@ namespace :db do
     make_users
     make_microposts
     make_relationships
+    make_categories
+    make_games
+    make_categorizations
   end
 end
 
@@ -24,6 +27,35 @@ def make_users
   end
 end
 
+def make_categories
+  10.times do |n|
+    name = "category-#{n+1}"
+    Category.create(name: name)
+  end
+end
+
+def make_games
+  20.times do |n|
+    name = Faker::App.name
+    description = Faker::Company.catch_phrase
+    version = Faker::App.version
+    email = Faker::Internet.email
+    webpage = Faker::Internet.url
+    Game.create!(name: name, description: description, version: version, email: email, webpage: webpage)
+  end
+end
+
+def make_categorizations
+  games = Game.all
+  categories = Category.all
+  20.times do |n|
+    games[n].assign_category!(categories[n%10])
+  end
+  5.times do |n|
+    games[n].assign_category!(categories[n+1])
+  end
+end
+
 def make_microposts
   users = User.all(limit: 6)
   50.times do
@@ -31,6 +63,7 @@ def make_microposts
     users.each { |user| user.microposts.create!(content: content) }
   end
 end
+
 
 def make_relationships
   users = User.all

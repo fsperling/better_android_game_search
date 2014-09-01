@@ -9,6 +9,9 @@ describe Game do
 
   it { should respond_to(:name) }
   it { should respond_to(:description) }
+  it { should respond_to(:version) }
+  it { should respond_to(:email) }
+  it { should respond_to(:webpage) }
   it { should respond_to(:game_categorizations) }
   it { should respond_to(:categories) }
   it { should respond_to(:assign_category!) }
@@ -31,6 +34,53 @@ describe Game do
     it { should_not be_valid }
   end
 
+  describe "when version is too long" do
+    before { @game.version = "a" * 31 }
+    it { should_not be_valid }
+  end
+  
+  describe "when email is too long" do
+    before { @game.email = "a" * 101 }
+    it { should_not be_valid }
+  end
+  
+  describe "when webpage is too long" do
+    before { @game.webpage = "a" * 101 }
+    it { should_not be_valid }
+  end
+  
+  describe "when email format is invalid" do
+    pending
+#    it "should be invalid" do
+#      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
+#      foo@bar_baz.com foo@bar+baz.com foo@bar..com]
+#      addresses.each do |invalid_address|
+#        @game.email = invalid_address
+#        expect(@game).not_to be_valid
+#      end
+#    end
+  end
+
+#  describe "when email format is valid" do
+#    it "should be valid" do
+#      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
+#      addresses.each do |valid_address|
+#        @game.email = valid_address
+#        expect(@game).to be_valid
+#      end
+#    end
+#  end
+  
+  describe "email address with mixed case" do
+    let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
+
+    it "should be saved as all lower-case" do
+      @game.email = mixed_case_email
+      @game.save
+      expect(@game.reload.email).to eq mixed_case_email.downcase
+    end
+  end
+  
   describe "when category is assigned" do
     @game = Game.new(name: "Abc345", description: "Abc ist ein tolles Game mit")
     let(:categoryA) { Category.new(name: "Ego-Shooter567") }
