@@ -10,6 +10,8 @@ class Game < ActiveRecord::Base
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
    validates :email, length: { maximum: 100 }, format: { with: VALID_EMAIL_REGEX }, :allow_blank => true 
    validates :webpage, length: { maximum: 100 }, :url => true, :allow_blank => true
+   validates :banner_icon_url, length: { maximum: 300 }, :url => true, :allow_blank => true
+   validates :banner_image_url, length: { maximum: 300 }, :url => true, :allow_blank => true
 
 
    def assign_category!(category) 

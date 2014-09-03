@@ -1,4 +1,8 @@
-<li>
-  <%= link_to game.name, game %> 
-  <%= game.description %>
-</li>
+<div class="media">
+    <%= link_to( image_tag(game.banner_icon_url, alt: game.name, id: "banner_icon", class: "img-responsive img-rounded media-object", size: "80"), game, class: "pull-left") %>
+  <div class="media-body">
+    <h4 class="media-heading pull-left"><%= link_to game.name, game %></h4>
+    <p class="pull-left"><%= game.description %></p>
+    <p><a href="#" class="btn btn-primary pull-right" role="button">Details</a></p>
+  </div>
+</div>

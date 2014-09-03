@@ -21,6 +21,8 @@ FactoryGirl.define do
     version "v1.0"
     email "bla@asdf.com"
     webpage "http://www.asdf.com/"
+    banner_icon_url "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w200"
+    banner_image_url "https://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w400"
     
 #    factory :game_with_categories do
 #      transient do

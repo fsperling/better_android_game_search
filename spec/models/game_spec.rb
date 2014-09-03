@@ -17,6 +17,8 @@ describe Game do
   it { should respond_to(:assign_category!) }
   it { should respond_to(:category?) }
   it { should respond_to(:remove_from_category!) }
+  it { should respond_to(:banner_icon_url) }
+  it { should respond_to(:banner_image_url) }
   
 
   describe "when name is not present" do
@@ -48,24 +50,56 @@ describe Game do
     before { @game.webpage = "a" * 101 }
     it { should_not be_valid }
   end
+
+  describe "when banner_icon_url is too long" do
+    before { @game.banner_icon_url = "a" * 301 }
+    it { should_not be_valid }
+  end
+
+  describe "when banner_image_url is too long" do
+    before { @game.banner_image_url = "a" * 301 }
+    it { should_not be_valid }
+  end
+
+  describe "when webpage is too long" do
+    before { @game.webpage = "a" * 101 }
+    it { should_not be_valid }
+  end
+
   
   describe "when webpage is not a url" do
-    it "should be invalid" do
-      addresses = ["abc", "www.abc.de"]
-      addresses.each do |invalid_address|
-        @game.webpage = invalid_address
-        expect(@game).to be_invalid
-      end
-    end  
+    it "should not be valid" do
+      expect(invalid_url?(@game.webpage, @game)).to be_true
+    end
   end
   
-  describe "when webpage is valid url" do
+  describe "when banner_icon_url is not a url" do
+    it "should not be valid" do
+      expect(invalid_url?(@game.banner_icon_url, @game)).to be_true
+    end
+  end
+
+  describe "when banner_image_url is not a url" do
+    it "should not be valid" do
+      expect(invalid_url?(@game.banner_image_url, @game)).to be_true
+    end
+  end  
+  
+  describe "when webpage is url" do
     it "should be valid" do
-      addresses = ["http://www.ard.de/", "https://gmail.com", "http://asdf.com"]
-      addresses.each do |valid_address|
-        @game.webpage = valid_address
-        expect(@game).to be_valid
-      end
+      expect(valid_url?(@game.webpage, @game)).to be_true
+    end
+  end
+  
+  describe "when banner_image_url is url" do
+    it "should be valid" do
+      expect(valid_url?(@game.banner_image_url, @game)).to be_true
+    end
+  end
+  
+  describe "when banner_icon_url is url" do
+    it "should be valid" do
+      expect(valid_url?(@game.banner_icon_url, @game)).to be_true
     end
   end
   

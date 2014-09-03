@@ -13,5 +13,11 @@
   <%= f.label :webpage %>
   <%= f.text_field :webpage %>
 
+  <%= f.label :banner_icon_url %>
+  <%= f.text_field :banner_icon_url %>
+
+  <%= f.label :banner_image_url %>
+  <%= f.text_field :banner_image_url %>
+
   
   <%= collection_check_boxes(:game, :category_ids, Category.all, :id, :name) %>

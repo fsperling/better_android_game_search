@@ -37,11 +37,14 @@ end
 def make_games
   20.times do |n|
     name = Faker::App.name
-    description = Faker::Company.catch_phrase
+    description = Faker::Lorem.paragraph
     version = Faker::App.version
     email = Faker::Internet.email
     webpage = Faker::Internet.url
-    Game.create!(name: name, description: description, version: version, email: email, webpage: webpage)
+    banner_image_url = "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w400"
+    banner_icon_url = "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w200"
+    Game.create!(name: name, description: description, version: version, email: email, webpage: webpage,
+            banner_image_url: banner_image_url, banner_icon_url: banner_icon_url)
   end
 end
 
