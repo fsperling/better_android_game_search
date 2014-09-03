@@ -49,27 +49,46 @@ describe Game do
     it { should_not be_valid }
   end
   
+  describe "when webpage is not a url" do
+    it "should be invalid" do
+      addresses = ["abc", "www.abc.de"]
+      addresses.each do |invalid_address|
+        @game.webpage = invalid_address
+        expect(@game).to be_invalid
+      end
+    end  
+  end
+  
+  describe "when webpage is valid url" do
+    it "should be valid" do
+      addresses = ["http://www.ard.de/", "https://gmail.com", "http://asdf.com"]
+      addresses.each do |valid_address|
+        @game.webpage = valid_address
+        expect(@game).to be_valid
+      end
+    end
+  end
+  
   describe "when email format is invalid" do
-    pending
-#    it "should be invalid" do
-#      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
-#      foo@bar_baz.com foo@bar+baz.com foo@bar..com]
-#      addresses.each do |invalid_address|
-#        @game.email = invalid_address
-#        expect(@game).not_to be_valid
-#      end
-#    end
+    it "should be invalid" do
+      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
+      foo@bar_baz.com foo@bar+baz.com foo@bar..com]
+      addresses.each do |invalid_address|
+        @game.email = invalid_address
+        expect(@game).not_to be_valid
+      end
+    end
   end
 
-#  describe "when email format is valid" do
-#    it "should be valid" do
-#      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
-#      addresses.each do |valid_address|
-#        @game.email = valid_address
-#        expect(@game).to be_valid
-#      end
-#    end
-#  end
+  describe "when email format is valid" do
+    it "should be valid" do
+      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
+      addresses.each do |valid_address|
+        @game.email = valid_address
+        expect(@game).to be_valid
+      end
+    end
+  end
   
   describe "email address with mixed case" do
     let(:mixed_case_email) { "Foo@ExAMPle.CoM" }

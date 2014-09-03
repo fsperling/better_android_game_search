@@ -1,0 +1,39 @@
+
+"app_id": "com.linecorp.LGGRTHN",
+  "title": "LINE Let's Get Rich",
+  "rating": "4.4",
+  "updated": "August 12, 2014",
+  "current_version": "1.0.1",
+  "requires_android": "2.3.3 and up",
+  "category": "Casual",
+  "installs": "5,000,000 - 10,000,000",
+  "size": "39M",
+  "price": "0",
+  "content_rating": "Everyone",
+  "description": "<div class=\"id-app-orig-desc\">This game is fun for all ages &ndash; just roll the dice and you&rsquo;re off on an adventure! <br>Journey around the world with your friends or family members.<br>Roll the dice and feel the fun!<br>This game packs all the thrill of being a real estate tycoon&ndash; just don&rsquo;t go bankrupt!<p>Travel the world - when you&rsquo;re done with that, head for space!<br>Construct famous landmarks in various places during your travels across the globe.<\/p>\n<p>Take what you can when you can.<br>Roll the dice and snatch up all the properties!<br>Use your character cards and a little bit of luck to get rich beyond your wildest dreams!<\/p>\n<p>This game is packed with unique characters.<br>The prankster Dennis, girl-genius Yuka, the alluring stewardess Catrina, major league baseball star Hernandez and more are all waiting to help you achieve your destiny!<\/p>\n<p>Game-changing Chance Cards<br>Turn the tables on your opponent with a single Chance Card.<br>These cards can help you turn the tide of the game - spread plagues over your opponents cities, lower land values, force your opponent to switch properties with you, and more!<\/p>\n<p>Play with your friends for an even more exciting adventure!<br>Team up with friends to form your own real estate dream team.<br>Are you ready for the adventure of a lifetime?<br>That&rsquo;s everything there is to know! Grab your friends and family and Get Rich now!<\/p>\n<\/div> <div class=\"show-more-end\"><\/div>",
+  "votes": "754414",
+  "developer": "LINE Corporation",
+   "banner_icon_url": "https:\/\/lh4.ggpht.com\/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w300",
+  "banner_image_url": "https:\/\/lh4.ggpht.com\/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w300",
+  "website_url": "http:\/\/game.line.naver.jp\/privacy\/en\/",
+  "email": null,
+   "screenshot_urls": [
+    "https:\/\/lh5.ggpht.com\/JhMfFpZ916BWSwkRuDhUYx1Qk1jZma3XAIBIzOj_6oGh-lCbf5xPVX_S_s7azfwJ5HA=h310",
+    "https:\/\/lh6.ggpht.com\/qcGhizsueeESbh_wxPNOqWXe2u669Ss342ua3l8Bt7ZQvHU-ufvuty6KaT7R3-ZpRds=h310",
+    "https:\/\/lh4.ggpht.com\/vAZSBwYV-omspH-LdaO4o1bs-iWM96n6_odgT6gzQuWWolyI8KZPWK9ZSB53tHM2Y38=h310",
+    "https:\/\/lh3.ggpht.com\/dbBguXLroTRRZzHCsJKbc3MkcoW1k9S4o3IRPUtE0-8apXe8c1aMbjb2jXB4KQTQ2YZZ=h310",
+    "https:\/\/lh3.ggpht.com\/dVWGvssiz5WxVqVE_zFRHa3QhbYa04fhdvAI6ANJBbulAJt-XvKrUArgGFv2Cfh21TQ=h310"
+    ],
+  "whats_new": "<div class=\"details-section-contents show-more-container\"> <div class=\"heading\"> What's New <\/div> <div class=\"recent-change\">1.Network Status display while playing<\/div>\n<div class=\"recent-change\">2.Character image modified<\/div>\n<div class=\"recent-change\">3.Some Bug Fix<\/div> <div class=\"show-more-end\"><\/div> <div> <button class=\"play-button show-more small\"> Read more <\/button> <button class=\"play-button expand-close\"> <div class=\"close-image\"> <\/div> <\/button> <\/div> <\/div> <div class=\"details-section-divider\"><\/div>",
+  "permissions": [
+    
+  ],
+  "rating_distribution": {
+    "5": 493134,
+    "4": 148286,
+    "3": 57801,
+    "2": 20662,
+    "1": 34531
+  }
+  "category_url": "GAME_CASUAL"
+  

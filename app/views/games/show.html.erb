@@ -1,7 +1,7 @@
 <h1><%= @game.name %></h1>
 <p><%= @game.description %></p>
 <p>Version: <%= @game.version %><br />
-	Email: <%= @game.email %><br />
+	Email: <%= link_to @game.email, "mailto:" + @game.email %><br />
 	Webpage: <%= link_to @game.webpage, @game.webpage %><br />
 </p>
 <p>

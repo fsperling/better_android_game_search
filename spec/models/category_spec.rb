@@ -56,4 +56,13 @@ describe Category do
       expect(@category.games).to eq([g1, g2])
     end 
   end
+  
+  describe "when category is created by factory girl" do
+     let(:category1) { FactoryGirl.create(:category) }
+     
+     it "should be stored in the db" do
+       expect(Category.find_by(id: category1.id)).to be_true
+       expect(Category.find_by(id: category1.id).name).to eq(category1.name) 
+     end
+  end
 end

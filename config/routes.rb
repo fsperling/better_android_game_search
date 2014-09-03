@@ -19,6 +19,7 @@ SampleApp::Application.routes.draw do
   match '/home',    to: 'static_pages#home2',   via: 'get'
   root 'static_pages#home'
   
+  match '/gamedetails', to: 'tests#details', via: 'get'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

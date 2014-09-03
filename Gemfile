@@ -16,6 +16,7 @@ end
 group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
+  gem 'capybara-screenshot'
   gem 'libnotify', '0.8.0'
 
   gem 'spork-rails', '4.0.0'
@@ -33,6 +34,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'faker', '1.4.3'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+gem 'market_bot', '0.12.0'
 
 
 # Use SCSS for stylesheets
