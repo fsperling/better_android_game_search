@@ -8,6 +8,10 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
     @categories = Category.all
+    
+    3.times do
+      @game.screenshots.build
+    end
   end
   
   def create
@@ -27,6 +31,7 @@ class GamesController < ApplicationController
   
   def edit
     @game = Game.find(params[:id])
+    @game.screenshots.build
   end
 
   def update
@@ -42,6 +47,7 @@ class GamesController < ApplicationController
   private
 
     def user_params
-      params.require(:game).permit(:name, :description, :version, :email, :webpage, :banner_icon_url, :banner_image_url, category_ids: [])
+      params.require(:game).permit(:name, :description, :version, :email, 
+          :webpage, :banner_icon_url, :banner_image_url, screenshots_attributes: [:id, :url, :_destroy], category_ids: [])
     end
 end

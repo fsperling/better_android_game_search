@@ -1,4 +1,7 @@
 class Game < ActiveRecord::Base
+   has_many :screenshots, dependent: :destroy
+   accepts_nested_attributes_for :screenshots, :reject_if => lambda { |a| a[:url].blank? }, :allow_destroy => true
+  
    has_many :game_categorizations, dependent: :destroy
    has_many :categories, through: :game_categorizations
   
@@ -12,7 +15,6 @@ class Game < ActiveRecord::Base
    validates :webpage, length: { maximum: 100 }, :url => true, :allow_blank => true
    validates :banner_icon_url, length: { maximum: 300 }, :url => true, :allow_blank => true
    validates :banner_image_url, length: { maximum: 300 }, :url => true, :allow_blank => true
-
 
    def assign_category!(category) 
      game_categorizations.create!(category_id: category.id)

@@ -13,11 +13,20 @@
   <%= f.label :webpage %>
   <%= f.text_field :webpage %>
 
-  <%= f.label :banner_icon_url %>
+  <%= f.label :banner_icon_url, "URL of Icon" %>
   <%= f.text_field :banner_icon_url %>
 
-  <%= f.label :banner_image_url %>
+  <%= f.label :banner_image_url, "URL of Banner Image" %>
   <%= f.text_field :banner_image_url %>
 
-  
+  <% @game.screenshots.each.with_index do |screenshot, index| %>
+  <%= f.fields_for :screenshots, screenshot do |builder| %>
+    <%= builder.label :url, "Screenshot #{index+1} URL" %><br />
+    <%= builder.text_field :url %><br />
+    <%= builder.check_box :_destroy %>
+    <%= builder.label :_destroy, "Remove URL" %>
+  <% end %>
+  <% end %>
+
   <%= collection_check_boxes(:game, :category_ids, Category.all, :id, :name) %>
+

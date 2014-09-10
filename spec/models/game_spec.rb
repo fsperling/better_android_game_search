@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Game do
 
   before do
-    @game = Game.new(name: "Game Abc123", description: "Abc ist ein tolles Game mit")
+    @game = Game.new(name: "Unreal", description: "super shooter")
   end
   subject { @game }
 
@@ -19,6 +19,7 @@ describe Game do
   it { should respond_to(:remove_from_category!) }
   it { should respond_to(:banner_icon_url) }
   it { should respond_to(:banner_image_url) }
+  it { should respond_to(:screenshots) }
   
 
   describe "when name is not present" do
@@ -47,7 +48,7 @@ describe Game do
   end
   
   describe "when webpage is too long" do
-    before { @game.webpage = "a" * 101 }
+    before { @game.webpage = "http://" + "a" * 101 }
     it { should_not be_valid }
   end
 
@@ -65,44 +66,28 @@ describe Game do
     before { @game.webpage = "a" * 101 }
     it { should_not be_valid }
   end
-
   
-  describe "when webpage is not a url" do
-    it "should not be valid" do
-      expect(invalid_url?(@game.webpage, @game)).to be_true
-    end
-  end
-  
-  describe "when banner_icon_url is not a url" do
-    it "should not be valid" do
-      expect(invalid_url?(@game.banner_icon_url, @game)).to be_true
+  describe "when assigning a value to webpage" do
+    before { @game.webpage = "http://random.com/abc"}
+    it "should only accept urls" do
+      expect(only_urls_are_accepted(@game.webpage, @game)).to be_true
     end
   end
 
-  describe "when banner_image_url is not a url" do
-    it "should not be valid" do
-      expect(invalid_url?(@game.banner_image_url, @game)).to be_true
+  describe "when assigning a value to banner_icon_url" do
+    before { @game.banner_icon_url = "http://random.com/abc"}
+    it "should only accept urls" do
+      expect(only_urls_are_accepted(@game.banner_icon_url, @game)).to be_true
     end
   end  
-  
-  describe "when webpage is url" do
-    it "should be valid" do
-      expect(valid_url?(@game.webpage, @game)).to be_true
+
+  describe "when assigning a value to banner_image_url" do
+    before { @game.banner_image_url = "http://random.com/abc"}
+    it "should only accept urls" do
+      expect(only_urls_are_accepted(@game.banner_image_url, @game)).to be_true
     end
-  end
-  
-  describe "when banner_image_url is url" do
-    it "should be valid" do
-      expect(valid_url?(@game.banner_image_url, @game)).to be_true
-    end
-  end
-  
-  describe "when banner_icon_url is url" do
-    it "should be valid" do
-      expect(valid_url?(@game.banner_icon_url, @game)).to be_true
-    end
-  end
-  
+  end  
+
   describe "when email format is invalid" do
     it "should be invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.
@@ -180,4 +165,25 @@ describe Game do
     end
 
   end
+  
+  describe "screenshot associations" do
+
+    before { @game.save }
+    let!(:screenshot1) { FactoryGirl.create(:screenshot, game: @game) }
+    let!(:screenshot2) { FactoryGirl.create(:screenshot, game: @game) }
+
+    it "should have the right screenshots" do
+      expect(@game.screenshots.to_a).to eq [screenshot1, screenshot2]
+    end
+  
+    it "should destroy associated screenshots" do
+      screenshots = @game.screenshots.to_a
+      @game.destroy
+      expect(screenshots).not_to be_empty
+      screenshots.each do |screenshot|
+        expect(Screenshot.where(id: screenshot.id)).to be_empty
+      end
+    end  
+  end
+  
 end

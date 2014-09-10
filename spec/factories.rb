@@ -20,7 +20,7 @@ FactoryGirl.define do
     description "alien ego shooter"
     version "v1.0"
     email "bla@asdf.com"
-    webpage "http://www.asdf.com/"
+    webpage "http://www.asdf.com/asd"
     banner_icon_url "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w200"
     banner_image_url "https://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w400"
     
@@ -38,5 +38,10 @@ FactoryGirl.define do
   factory :category do
     sequence(:name) { |n| "fg-category-#{n}" }
   end
-  
+
+  factory :screenshot do
+    url "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w200"
+    game
+  end
+
 end

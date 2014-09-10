@@ -14,21 +14,19 @@ def sign_in(user, options={})
   end
 end
 
-def invalid_url?(field_under_test, object_under_test)
-    address_valid = true
-    addresses = ["abc", "www.abc.de"]
-    addresses.each do |invalid_address|
-      field_under_test = invalid_address
-      address_valid = object_under_test.valid?
+def only_urls_are_accepted(field_under_test, object_under_test)
+    only_urls_valid = true
+    other = ["abc", "www.abc.de"]
+    urls = ["http://www.ard.de/", "https://gmail.com", "http://asdf.com", "http://asdf.com/asdfddcd?&$f"]
+    
+    other.each do |invalid_value|
+      field_under_test.replace invalid_value
+      only_urls_valid = object_under_test.invalid?
     end
-    return address_valid
-end
-
-def valid_url?(field_under_test, object_under_test)
-    address_valid = false
-    addresses = ["http://www.ard.de/", "https://gmail.com", "http://asdf.com"]
-    addresses.each do |valid_address|
-      field_under_test = valid_address
-      address_valid = object_under_test.valid?
+    
+    urls.each do |valid_value|
+      field_under_test.replace valid_value
+      only_urls_valid = object_under_test.valid?
     end
+    return only_urls_valid
 end

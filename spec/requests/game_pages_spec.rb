@@ -3,9 +3,10 @@ require 'spec_helper'
 describe "GamePages" do
   subject { page }
   let!(:created_categories) { FactoryGirl.create_list(:category, 5) }
-
+  
   describe "game details page" do
     let(:game) { FactoryGirl.create(:game) }
+    let!(:s1) { FactoryGirl.create(:screenshot, game: game) }
     before { visit game_path(game) }
   
     it { should have_selector('h1', text: game.name) }
@@ -15,6 +16,7 @@ describe "GamePages" do
     it { should have_content(game.email) }
     it { should have_content(game.webpage) }
     it { should have_selector(:xpath, './/img[@id="banner_image"]')}
+    it { should have_selector(:xpath, './/img[@id="screenshot"]')}
   end
   
   describe "create new game page" do
@@ -74,8 +76,8 @@ describe "GamePages" do
       before do
         fill_in "Name",         with: "Example Game"
         fill_in "Description",  with: "Example Desc"
-        fill_in "Banner icon url",     with: iconurl
-        fill_in "Banner image url",    with: imageurl
+        fill_in "URL of Icon",     with: iconurl
+        fill_in "URL of Banner Image",    with: imageurl
       end
              
       it "should have image urls" do
@@ -84,10 +86,29 @@ describe "GamePages" do
         Game.last.banner_image_url.should eq(imageurl)
       end
     end
+    
+    describe "with valid info and screenshots" do
+      let(:s1) { "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w200" }
+      let(:s2) { "http://lh4.ggpht.com/j19PDvSV8SoM7FwnXrNqx4PgfpBijHrmpQ0IYp6eOyp06ZqtmVaXa1HyGgb3eCtQ8HE=w400" }
+      
+      before do
+        fill_in "Name",         with: "Example Game"
+        fill_in "Description",  with: "Example Desc"
+        fill_in "Screenshot 1 URL", with: s1
+        fill_in "Screenshot 2 URL", with: s2
+      end
+             
+      it "should have screenshot urls" do
+        click_button submit
+        Game.last.screenshots.map(&:url).should eq [s1, s2]     
+      end
+    end
+
   end  
   
   describe "edit game" do
     let(:game) { FactoryGirl.create(:game) }
+    let!(:s1) { FactoryGirl.create(:screenshot, game: game) }
     
     before {
       game.assign_category!(created_categories[0]) 
@@ -103,6 +124,7 @@ describe "GamePages" do
     it { should have_field('game_version', :with => game.version) }
     it { should have_field('game_email', :with => game.email) }
     it { should have_field('game_webpage', :with => game.webpage) }
+    it { should have_field('game_screenshots_attributes_0_url', :with => game.screenshots[0].url) }
     it { should have_button("Save changes") }
 
     it { should have_checked_field(created_categories[0].name) } 
@@ -116,16 +138,20 @@ describe "GamePages" do
       let(:new_version) { "new version" }
       let(:new_email) { "new@email.com" }
       let(:new_webpage) { "http://new.webpage.com" }
-      let(:new_iconurl) { "https://lh6.ggpht.com/t2UBg_uoZ8VIeGDQAIVdLUXkpWIf3offNDLrjTos5Ia5uACSjOw5ZgUV7n16A0jyZQ=w200" }
-      let(:new_imageurl) { "https://lh6.ggpht.com/t2UBg_uoZ8VIeGDQAIVdLUXkpWIf3offNDLrjTos5Ia5uACSjOw5ZgUV7n16A0jyZQ=w400" }
+      let(:new_iconurl) { "https://lh126.ggpht.com/t2UBg_uoZ8VIeGDQAIVdLULrjTos5Ia5uACSjOw5ZgUV7n16A0jyZQ=w200" }
+      let(:new_imageurl) { "https://lh116.ggpht.com/t2UBg_uoZ8VIeGDQAIVdLUXkpWa5uACSjOw5ZgUV7n16A0jyZQ=w400" }
+      let(:new_screenshoturl1) { "https://lh1116.ggpht.com/t2UBg_uoZ8VIeGDQAIVdLUXkpWa5uACSjOw5ZgUV7n16A0jyZQ=w400" }
+      let(:new_screenshoturl2) { "https://lh1216.ggpht.com/t2UBg_uoZ8VIeGDQAIVdLUXkpWa5uACSjOw5ZgUV7n16A0jyZQ=w400" }
       before do
         fill_in "Name",             with: new_name
         fill_in "Description",      with: new_desc
         fill_in "Version",          with: new_version
         fill_in "Email",            with: new_email
         fill_in "Webpage",          with: new_webpage
-        fill_in "Banner icon url",     with: new_iconurl
-        fill_in "Banner image url",    with: new_imageurl        
+        fill_in "URL of Icon",     with: new_iconurl
+        fill_in "URL of Banner Image",    with: new_imageurl
+        fill_in "Screenshot 1 URL",     with: new_screenshoturl1
+        fill_in "Screenshot 2 URL",     with: new_screenshoturl2        
         check(created_categories[2].name)
         uncheck(created_categories[1].name)
         click_button "Save changes"
@@ -142,6 +168,8 @@ describe "GamePages" do
       specify { expect(game.reload.webpage).to eq new_webpage }
       specify { expect(game.reload.banner_icon_url).to eq new_iconurl }
       specify { expect(game.reload.banner_image_url).to eq new_imageurl }
+      specify { expect(game.reload.screenshots[0].url).to eq new_screenshoturl1 }
+      specify { expect(game.reload.screenshots[1].url).to eq new_screenshoturl2 }
     end    
   end
     

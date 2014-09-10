@@ -7,6 +7,13 @@
 <p>
 	<% @category_names.each do |category| %>
 	    <%= category %>
-	    <% end %>
+    <% end %>
 </p>
 <%= image_tag(@game.banner_image_url, alt: @game.name, id: "banner_image") %>
+
+<h3>Screenshots</h3>
+<% @game.screenshots.each do |screenshot| %>
+	<%= image_tag(screenshot.url, alt: "Screenshot " + @game.name, id: "screenshot") %>
+<% end %>
+
+<p><%= link_to "Edit", edit_game_path %></p>
